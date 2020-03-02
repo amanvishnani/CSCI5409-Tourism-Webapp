@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-tourism-app-dev-123410-authRole",
+            "UnauthRoleArn": "arn:aws:iam::176860289216:role/amplify-tourism-app-dev-123410-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::176860289216:role/amplify-tourism-app-dev-123410-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-tourism-app-dev-123410-deployment",
+            "UnauthRoleName": "amplify-tourism-app-dev-123410-unauthRole",
+            "StackName": "amplify-tourism-app-dev-123410",
+            "StackId": "arn:aws:cloudformation:us-east-1:176860289216:stack/amplify-tourism-app-dev-123410/a7cee440-5ca3-11ea-8305-0e9c8848c400",
+            "AmplifyAppId": "df4m98lt2a2ru"
+        },
+        "categories": {
+            "auth": {
+                "tourismapp7d27292b": {}
+            }
+        }
+    }
+}
