@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="danger" *ngIf="errorMessage!=''">{{errorMessage}}</div>
+<div class="info" *ngIf="infoMessage!=''">{{infoMessage}}</div>
+<div class="registration-box">
+    <div *ngIf="mode=='registration'">
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="username">
+        </mat-form-field>
+        <br/>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput [(ngModel)]="phone">
+        </mat-form-field>
+        <br/>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [(ngModel)]="password" [type]="'password'">
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button (click)="register()">Register</button>
+    </div>
+    <div *ngIf='mode == "verification"'>
+        <mat-form-field appearance="fill">
+            <mat-label>Verification Code</mat-label>
+            <input matInput [(ngModel)]="code">
+        </mat-form-field>
+        <button mat-raised-button (click)="verify()">Verify</button>
+    </div>
+</div>

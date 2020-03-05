@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,26 +11,40 @@ export class LoginComponent implements OnInit {
 
   username = "aman"
   password = "aman@1234"
+  code = ''
+  mode = 'login'
+  user = null
+  errorMessage = ''
 
-  constructor(private ampSvc: AmplifyService) { }
+  constructor(private ampSvc: AmplifyService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   async login() {
     try {
-      debugger
       let auth = this.ampSvc.auth()
       let r = await auth.signIn(this.username, this.password)
+      this.user = r
       if(r?.challengeName == "NEW_PASSWORD_REQUIRED") {
         let r1 = await auth.completeNewPassword(r, this.password, r.challengeParam.requiredAttributes)
-        console.log(r1);
+      } else if (r?.challengeName == "SMS_MFA") {
+        this.mode = 'verification'
       }
-      debugger
       
     } catch (error) {
-      console.log(error);
-      
+      this.errorMessage = 'Verification Failed please try again'
+    }
+  }
+
+  async verify() {
+    let auth = this.ampSvc.auth()
+    try {
+      let r = await auth.confirmSignIn(this.user, this.code)
+      alert("SUCCESS")
+      this.router.navigateByUrl("/")
+    } catch (error) {
+      console.log(error)
     }
   }
 

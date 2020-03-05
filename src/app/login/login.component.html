@@ -1,13 +1,23 @@
+<div class="danger" *ngIf='errorMessage!=""'>{{errorMessage}}</div>
 <div class="login-box">
-    <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="username">
-    </mat-form-field>
-    <br/>
-    <mat-form-field appearance="fill">
-        <mat-label>Enter your password</mat-label>
-        <input matInput [(ngModel)]="password" [type]="'password'">
-    </mat-form-field>
-    <br/>
-    <button mat-raised-button (click)="login()">Login</button>
+    <div *ngIf="mode == 'login'">
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="username">
+        </mat-form-field>
+        <br/>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [(ngModel)]="password" [type]="'password'">
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button (click)="login()">Login</button>
+    </div>
+    <div *ngIf='mode == "verification"'>
+        <mat-form-field appearance="fill">
+            <mat-label>Verification Code</mat-label>
+            <input matInput [(ngModel)]="code">
+        </mat-form-field>
+        <button mat-raised-button (click)="verify()">Verify</button>
+    </div>
 </div>
