@@ -16,12 +16,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AmplifyAngularModule, AmplifyService } from "aws-amplify-angular";
 import { FormsModule } from '@angular/forms';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
