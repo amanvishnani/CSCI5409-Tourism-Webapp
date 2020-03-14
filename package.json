@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.0.3",
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
+    "@ng-bootstrap/ng-bootstrap": "^6.0.0",
     "aws-amplify": "^2.2.6",
     "aws-amplify-angular": "^4.1.7",
     "rxjs": "~6.5.4",

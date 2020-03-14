@@ -18,6 +18,15 @@ const routes: Routes = [{
 }, {
   path: '',
   component: InfoComponent
+}, {
+  path: 'cities',
+  component: InfoComponent
+}, {
+  path: 'attractions',
+  component: InfoComponent
+}, {
+  path: 'bus-bookings',
+  component: InfoComponent
 }];
 
 @NgModule({

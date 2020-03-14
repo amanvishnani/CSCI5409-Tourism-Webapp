@@ -1,0 +1,11 @@
+<!-- <div>
+    <img [src]="place.imageUrl" style="width:100%">
+    {{place.name}}
+</div> -->
+<mat-card class="example-card">
+    <img mat-card-image [src]="place.imageUrl" alt="Photo of a Shiba Inu">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{place.name}}</mat-card-title>
+    </mat-card-header>
+</mat-card>

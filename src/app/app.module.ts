@@ -12,18 +12,24 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AmplifyAngularModule, AmplifyService } from "aws-amplify-angular";
 import { FormsModule } from '@angular/forms';
 import { InfoComponent } from './info/info.component';
+import { InfoCardComponent } from './info-card/info-card.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    InfoComponent
+    InfoComponent,
+    InfoCardComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,8 @@ import { InfoComponent } from './info/info.component';
     MatRadioModule,
     MatButtonModule,
     AmplifyAngularModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]
