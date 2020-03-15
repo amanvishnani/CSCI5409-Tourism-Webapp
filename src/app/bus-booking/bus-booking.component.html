@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <form class="form-inline">
+            <div class="form-group">
+                <input id="source-city" type="text" placeholder="Source City" class="form-control col-md-3"
+                    [(ngModel)]="sourceCity" [ngbTypeahead]="search" name="sourceCity" />
+                <input id="destination-city" type="text" placeholder="Destination City" class="form-control col-md-3"
+                    [(ngModel)]="destinationCity" [ngbTypeahead]="search" name="destinationCity" />
+                <div class="input-group col-md-4">
+                    <input class="form-control" placeholder="Journey Date" name="dp" [(ngModel)]="journeyDate"
+                        ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                            <fa-icon [icon]="faCalendar"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+                <button class="col-md-2" mat-button>
+                    <mat-icon>search</mat-icon>
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+    <table style="margin-top: 50px;" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Bus Op</th>
+                <th scope="col">Bus Num</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bus of [1,2,3,4] ; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                    Bus {{i}}
+                </td>
+                <td>Bus Num</td>
+                <a routerLink="/book-bus" mat-button mat-raised-button>Book</a>
+            </tr>
+        </tbody>
+    </table>
+</div>

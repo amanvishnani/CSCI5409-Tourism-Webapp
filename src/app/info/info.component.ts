@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../assets/sample.json'
+import { Router } from '@angular/router';
 
 
 
@@ -10,13 +11,18 @@ import data from '../../assets/sample.json'
 })
 export class InfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
   title = 'json-file-read-angular';
   products: any = data;
+  type: string;
 
   ngOnInit() {
-
-    console.log(data);
+    if(this.router.url.indexOf("attractions") != -1) {
+      this.type = "attractions"
+    } else {
+      this.type = "city"
+    }
+    console.log();
   }
 
 }

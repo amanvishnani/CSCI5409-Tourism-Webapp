@@ -21,6 +21,12 @@ import { FormsModule } from '@angular/forms';
 import { InfoComponent } from './info/info.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { BusBookingComponent } from './bus-booking/bus-booking.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookBusComponent } from './book-bus/book-bus.component';
+import { CityDetailComponent } from './city-detail/city-detail.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,11 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     RegisterComponent,
     InfoComponent,
     InfoCardComponent,
-    NavBarComponent
+    NavBarComponent,
+    BusBookingComponent,
+    BookBusComponent,
+    CityDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     MatButtonModule,
     AmplifyAngularModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]

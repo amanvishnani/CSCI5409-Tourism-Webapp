@@ -1,7 +1,7 @@
 <div class="container" style="text-align:center">
     <div class="row">
-        <div class="col-md-4" *ngFor="let item of products">
-            <app-info-card [place]="item"></app-info-card>
+        <div class="place-card col-md-4" *ngFor="let item of products">
+            <app-info-card [place]="item" routerLink="/city/1"></app-info-card>
         </div>
     </div>
 </div>
