@@ -27,6 +27,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookBusComponent } from './book-bus/book-bus.component';
 import { CityDetailComponent } from './city-detail/city-detail.component';
 import { HomeComponent } from './home/home.component';
+import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
+import { MatStepperModule } from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { HomeComponent } from './home/home.component';
     BusBookingComponent,
     BookBusComponent,
     CityDetailComponent,
-    HomeComponent
+    HomeComponent,
+    AttractionDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     MatCardModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatStepperModule
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]

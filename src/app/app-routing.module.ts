@@ -8,6 +8,7 @@ import { BusBookingComponent } from './bus-booking/bus-booking.component';
 import { BookBusComponent } from './book-bus/book-bus.component';
 import { CityDetailComponent } from './city-detail/city-detail.component';
 import { HomeComponent } from './home/home.component';
+import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
 
 
 const routes: Routes = [{
@@ -37,6 +38,9 @@ const routes: Routes = [{
 }, {
   path: 'city/:cityId',
   component: CityDetailComponent
+}, {
+  path:'attraction/:id',
+  component: AttractionDetailsComponent
 }];
 
 @NgModule({

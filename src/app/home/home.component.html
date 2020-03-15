@@ -9,7 +9,7 @@
     <h1>Top Attractions</h1>
     <div class="row">
         <div class="col-md-3" *ngFor="let item of places.slice(0, 4)">
-            <app-info-card [place]="item"></app-info-card>
+            <app-info-card routerLink="/attraction/1" [place]="item"></app-info-card>
         </div>
     </div>
 </div>
