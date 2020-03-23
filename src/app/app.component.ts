@@ -14,7 +14,14 @@ export class AppComponent {
   }
   async fun() {
     try {
-      console.log(await Auth.currentAuthenticatedUser());
+      let user = await Auth.currentAuthenticatedUser()
+      var session = user.signInUserSession
+      if(!session?.accessToken?.jwtToken) {
+        user.clearCachedUser()
+      } else {
+        console.log(session.accessToken.jwtToken);
+      }
+      
     } catch(e) {
       console.log(e);
     }

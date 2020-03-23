@@ -1,15 +1,19 @@
 <div class="container">
     <h1>Top Destinations</h1>
     <div class="row">
-        <div class="col-md-3" *ngFor="let item of places.slice(0, 4)">
-            <app-info-card [place]="item"></app-info-card>
+        <div class="col-md-3" *ngFor="let item of topCities">
+            <a routerLink="/city/{{item.id}}">
+                <app-info-card [place]="item"></app-info-card>
+            </a>
         </div>
     </div>
 
     <h1>Top Attractions</h1>
     <div class="row">
-        <div class="col-md-3" *ngFor="let item of places.slice(0, 4)">
-            <app-info-card routerLink="/attraction/1" [place]="item"></app-info-card>
+        <div class="col-md-3" *ngFor="let item of topAttractions">
+            <a routerLink="/attraction/{{item._links.id}}">
+                <app-info-card [place]="item"></app-info-card>
+            </a>
         </div>
     </div>
 </div>

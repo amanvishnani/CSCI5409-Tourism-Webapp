@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,11 @@ export class LoginComponent implements OnInit {
   user = null
   errorMessage = ''
 
-  constructor(private ampSvc: AmplifyService, private router: Router) { }
+  constructor(
+    private ampSvc: AmplifyService, 
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +35,8 @@ export class LoginComponent implements OnInit {
         let r1 = await auth.completeNewPassword(r, this.password, r.challengeParam.requiredAttributes)
       } else if (r?.challengeName == "SMS_MFA") {
         this.mode = 'verification'
+      } else {
+        this.gotoNextPage()
       }
       
     } catch (error) {
@@ -42,10 +49,23 @@ export class LoginComponent implements OnInit {
     try {
       let r = await auth.confirmSignIn(this.user, this.code)
       alert("SUCCESS")
-      this.router.navigateByUrl("/")
+      this.gotoNextPage()
     } catch (error) {
       console.log(error)
     }
+  }
+
+  gotoNextPage() {
+    this.route.queryParamMap.subscribe(
+      map => {
+        debugger
+        if(map.get("ref")) {
+          this.router.navigateByUrl(`/${map.get("ref")}`)
+        } else {
+          this.router.navigateByUrl(`/`)
+        }
+      }
+    )
   }
 
 }

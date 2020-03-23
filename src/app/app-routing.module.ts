@@ -9,6 +9,8 @@ import { BookBusComponent } from './book-bus/book-bus.component';
 import { CityDetailComponent } from './city-detail/city-detail.component';
 import { HomeComponent } from './home/home.component';
 import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
+import { AuthGuard } from './auth.guard';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [{
@@ -34,13 +36,20 @@ const routes: Routes = [{
   component: BusBookingComponent
 }, {
   path: 'book-bus',
-  component: BookBusComponent
+  component: BookBusComponent,
+  canActivate: [AuthGuard],
+  canLoad: [AuthGuard]
 }, {
   path: 'city/:cityId',
-  component: CityDetailComponent
+  component: CityDetailComponent,
+  canActivate: [AuthGuard],
+  canLoad: [AuthGuard]
 }, {
   path:'attraction/:id',
   component: AttractionDetailsComponent
+}, {
+  path: 'logout',
+  component: LogoutComponent
 }];
 
 @NgModule({

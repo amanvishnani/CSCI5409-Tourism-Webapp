@@ -29,6 +29,8 @@ import { CityDetailComponent } from './city-detail/city-detail.component';
 import { HomeComponent } from './home/home.component';
 import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
 import { MatStepperModule } from "@angular/material/stepper";
+import { LogoutComponent } from './logout/logout.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { MatStepperModule } from "@angular/material/stepper";
     BookBusComponent,
     CityDetailComponent,
     HomeComponent,
-    AttractionDetailsComponent
+    AttractionDetailsComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { MatStepperModule } from "@angular/material/stepper";
     MatCardModule,
     NgbModule,
     FontAwesomeModule,
-    MatStepperModule
+    MatStepperModule,
+    HttpClientModule
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]

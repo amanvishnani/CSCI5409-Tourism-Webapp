@@ -1,4 +1,4 @@
 export interface Place {
-    imageUrl: string,
+    url: string,
     name: string;
 }

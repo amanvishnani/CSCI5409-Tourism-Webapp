@@ -1,16 +1,16 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span class="logo" routerLink="/">Tourism App</span>
-      <a mat-button routerLink="/cities">Cities</a>
-      <a mat-button routerLink="/attractions">Tourist Attractions</a>
-      <a mat-button routerLink="/bus-bookings">Bus Ticket</a>
-      <span class="spacer"></span>
-      <mat-icon class="account-icon" aria-hidden="false" aria-label="Account"  [matMenuTriggerFor]="menu">account_circle</mat-icon>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login">Login</button>
-        <button mat-menu-item>Logout</button>
-        <button mat-menu-item routerLink="/register">Register</button>
-      </mat-menu>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
+  <mat-toolbar-row>
+    <span class="logo" routerLink="/">Tourism App</span>
+    <a mat-button routerLink="/cities">Cities</a>
+    <a mat-button routerLink="/attractions">Tourist Attractions</a>
+    <a mat-button routerLink="/bus-bookings">Bus Ticket</a>
+    <span class="spacer"></span>
+    <mat-icon class="account-icon" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="menu">account_circle
+    </mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="!authState" routerLink="/login">Login</button>
+      <button mat-menu-item *ngIf="authState" routerLink="/logout">Logout</button>
+      <button mat-menu-item *ngIf="!authState" routerLink="/register">Register</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

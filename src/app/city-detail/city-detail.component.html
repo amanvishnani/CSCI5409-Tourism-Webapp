@@ -1,7 +1,8 @@
 <div class="cover">
-    <img src="../../assets/images/image1.jpeg" alt="" srcset="">
-    <span class="badge badge-secondary city-badge">Halifax</span>
-    <a mat-raised-button class="bus-tickets" [queryParams]="{destination: 'Halifax'}" routerLink="/bus-bookings">
+    <img [src]="city?.url" alt="" srcset="">
+
+    <span class="badge badge-secondary city-badge">{{city.name}}</span>
+    <a mat-raised-button class="bus-tickets" [queryParams]="{destination: city.name, cityId: city.id}" routerLink="/bus-bookings">
         <fa-icon [icon]="faBus"></fa-icon>
         <span style="margin-left: 10px;">Bus Tickets</span>
     </a>
@@ -9,7 +10,7 @@
 
 <div class="container" style="margin-top: 20px;">
     <div class="row">
-        <div class="col-md-4" *ngFor="let item of places" >
+        <div class="col-md-4" *ngFor="let item of attractions" >
             <app-info-card [place]="item"></app-info-card>
         </div>
     </div>
