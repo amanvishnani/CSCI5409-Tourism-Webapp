@@ -32,28 +32,18 @@ export class InfoService {
     .pipe(map(locs => {
       for (const loc of locs) {
         let arr = loc._links.self.href.split("touristLocations/")
-        loc._links.id = arr[1]
+        loc.locationId = parseInt(arr[1])
       }
       return locs
     }))
   }
 
   getTopCities(): Observable<City[]> {
-    return this.http.get<DataResource<City>>(`${this.BASE_URL}/cities`, {
-      params: {
-        "page": "1",
-        "size": "4"
-      }
-    }).pipe(map(r => r._embedded['cities']))
-    .pipe(map(
-      cities => {
-        for (const city of cities) {
-          let arr = city._links.self.href.split("cities/")
-          city.id = arr[1]
-        }
-        return cities
-      }
-    ))
+    return this.getPaginatedCities(0, 4)
+  }
+
+  getAllCities(): Observable<City[]> {
+    return this.getPaginatedCities(0, 1000  )
   }
 
   getCityDetail(cityId): Observable<City> {
@@ -70,5 +60,32 @@ export class InfoService {
         cityId
       }
     })
+  }
+
+  getPaginatedCities(pageNumber:number, pageSize:number) {
+    return this.http.get<DataResource<City>>(`${this.BASE_URL}/cities`, {
+      params: {
+        "page": `${pageNumber}`,
+        "size": `${pageSize}`
+      }
+    })
+    .pipe(map(
+      r => {
+        let cities = r._embedded['cities']
+        for (const city of cities) {
+          let arr = city._links.self.href.split("cities/")
+          city.id = arr[1]
+        }
+        return r
+      }
+    )).pipe(map(r => r._embedded['cities']))
+  }
+
+  getAllAttractions() {
+    return this.http.get<Attraction[]>(`${this.BASE_URL}/touristLocations/all`)
+  }
+
+  getAttractionById(locationId: any) {
+    return this.http.get<Attraction>(`${this.BASE_URL}/touristLocations/${locationId}`)
   }
 }

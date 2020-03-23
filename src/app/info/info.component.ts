@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../assets/sample.json'
 import { Router } from '@angular/router';
-
+import { Place } from '../Place';
+import { InfoService } from '../info.service';
 
 
 @Component({
@@ -11,18 +12,40 @@ import { Router } from '@angular/router';
 })
 export class InfoComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  places: Place[]
+
+  constructor(
+    private router: Router, 
+    private infoSvc: InfoService
+    ) { }
   title = 'json-file-read-angular';
   products: any = data;
   type: string;
 
   ngOnInit() {
     if(this.router.url.indexOf("attractions") != -1) {
-      this.type = "attractions"
+      this.type = "attraction"
+      this.infoSvc.getAllAttractions()
+      .subscribe(
+        places => this.places = places
+      )
     } else {
       this.type = "city"
+      this.infoSvc.getAllCities()
+      .subscribe(
+        places => this.places = places
+      )
     }
-    console.log();
+  }
+
+  getKey(place: Place) {
+    if(place.id) {
+      return place.id
+    } else if(place.locationId) {
+      return place.locationId
+    } else {
+      return -1
+    }
   }
 
 }

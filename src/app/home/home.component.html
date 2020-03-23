@@ -11,7 +11,7 @@
     <h1>Top Attractions</h1>
     <div class="row">
         <div class="col-md-3" *ngFor="let item of topAttractions">
-            <a routerLink="/attraction/{{item._links.id}}">
+            <a routerLink="/attraction/{{item.locationId}}">
                 <app-info-card [place]="item"></app-info-card>
             </a>
         </div>
