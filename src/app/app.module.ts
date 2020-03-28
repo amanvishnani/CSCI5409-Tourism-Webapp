@@ -30,7 +30,8 @@ import { HomeComponent } from './home/home.component';
 import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
 import { MatStepperModule } from "@angular/material/stepper";
 import { LogoutComponent } from './logout/logout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppHttpInterceptor } from './app-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatStepperModule,
     HttpClientModule
   ],
-  providers: [AmplifyService],
+  providers: [AmplifyService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

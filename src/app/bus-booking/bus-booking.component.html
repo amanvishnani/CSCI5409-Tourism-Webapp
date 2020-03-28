@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
-        <form class="form-inline">
+        <form class="form-inline" autocomplete="off" >
             <div class="form-group">
                 <input id="source-city" type="text" placeholder="Source City" class="form-control col-md-3"
-                    [(ngModel)]="sourceCity" [ngbTypeahead]="search" name="sourceCity" />
+                    [(ngModel)]="sourceCity" [ngbTypeahead]="search" name="sourceCit" />
                 <input id="destination-city" type="text" placeholder="Destination City" class="form-control col-md-3"
-                    [(ngModel)]="destinationCity" [ngbTypeahead]="search" name="destinationCity" />
+                    [(ngModel)]="destinationCity" [ngbTypeahead]="search" name="destinationCit" />
                 <div class="input-group col-md-4">
                     <input class="form-control" placeholder="Journey Date" name="dp" [(ngModel)]="journeyDate"
                         ngbDatepicker #d="ngbDatepicker">
@@ -15,7 +15,7 @@
                         </button>
                     </div>
                 </div>
-                <button class="col-md-2" mat-button>
+                <button class="col-md-2" mat-button (click)="searchRoutes()">
                     <mat-icon>search</mat-icon>
                     Search
                 </button>
@@ -25,20 +25,30 @@
     <table style="margin-top: 50px;" class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Bus Op</th>
-                <th scope="col">Bus Num</th>
+                <th scope="col">Bus Type</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Seats Available</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let bus of [1,2,3,4] ; index as i">
-                <th scope="row">{{ i + 1 }}</th>
+            <tr *ngFor="let bus of busRoutes; index as i">
+                <th scope="row">{{bus.operator}}</th>
                 <td>
-                    Bus {{i}}
+                    {{bus.type}}
                 </td>
-                <td>Bus Num</td>
-                <a routerLink="/book-bus" mat-button mat-raised-button>Book</a>
+                <td>{{bus.duration}} Hr</td>
+                <td>{{bus.cost | currency:'CAD'}}</td>
+                <td>
+                    <span *ngIf="bus.seatsAvailable!=undefined">
+                        {{bus.seatsAvailable}}
+                    </span>
+                    <a *ngIf="bus.seatsAvailable==undefined" (click)="checkAvailibility(bus)" mat-button mat-raised-button>Check Availibility</a>
+                </td>
+                <a *ngIf="isLoggedIn && bus.seatsAvailable" (click)="bookBus(bus)" mat-button mat-raised-button>Book</a>
+                <a *ngIf="!isLoggedIn" routerLink="/login"  [queryParams]="{ref: getRef()}" mat-button mat-raised-button>Login to Book</a>
             </tr>
         </tbody>
     </table>

@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
   gotoNextPage() {
     this.route.queryParamMap.subscribe(
       map => {
-        debugger
         if(map.get("ref")) {
           this.router.navigateByUrl(`/${map.get("ref")}`)
         } else {

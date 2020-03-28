@@ -41,9 +41,7 @@ const routes: Routes = [{
   canLoad: [AuthGuard]
 }, {
   path: 'city/:cityId',
-  component: CityDetailComponent,
-  canActivate: [AuthGuard],
-  canLoad: [AuthGuard]
+  component: CityDetailComponent
 }, {
   path:'attraction/:id',
   component: AttractionDetailsComponent

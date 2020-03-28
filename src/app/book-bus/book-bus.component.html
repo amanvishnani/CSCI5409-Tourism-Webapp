@@ -7,27 +7,25 @@
                     <tbody>
                         <tr>
                             <th>From</th>
-                            <td>Source City</td>
+                            <td>{{busDetails.sourceCity}}</td>
                         </tr>
                         <tr>
                             <th>To</th>
-                            <td>Dest City</td>
+                            <td>{{busDetails.destinationCity}}</td>
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <td>DD-MMM-YYYY</td>
-                        </tr>
-                        <tr>
-                            <th>Time</th>
-                            <td>24HH:MM</td>
+                            <td>{{busDetails.bus.date}}</td>
                         </tr>
                         <tr>
                             <th>Number of Tickets</th>
-                            <td>2</td>
+                            <td>
+                                <input [(ngModel)]="numTickets" type="number" [max]="busDetails.bus.seatsAvailable" />
+                            </td>
                         </tr>
                         <tr>
                             <th>Cost</th>
-                            <td>$ 123,45</td>
+                            <td>{{busDetails.bus.cost * numTickets | currency:'CAD'}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -40,14 +38,16 @@
             <div class="col-md-6">
                 <ng-template matStepLabel>Credit Card Details</ng-template>
                 <label style="margin-top: 50px;" for="cardNumber">16 Digit Number: <input name="cardNumber"
+                        [(ngModel)]="cardNumber"
                         placeholder="5555 5555 5555 5555" type="text" /></label>
                 <br />
-                <label for="CVV">CVV: <input name="CVV" type="password" maxlength="4" /></label>
+                <label for="CVV">CVV: <input name="CVV" type="password" maxlength="4"
+                    [(ngModel)]="cvv" /></label>
                 <br />
                 <label for="expiry">Expiry Date (MMYY): <input name="expiry" type="text" placeholder="MMYY"
-                        maxlength="4" /></label>
+                        maxlength="4" [(ngModel)]="cardExp" /></label>
                 <br />
-                <button mat-raised-button>Pay</button>
+                <button mat-raised-button (click)="payAndcompleteBooking()">Pay</button>
             </div>
         </div>
     </mat-step>
