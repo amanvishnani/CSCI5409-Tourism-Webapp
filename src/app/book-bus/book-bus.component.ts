@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from "rxjs/operators";
 import { BookingService } from '../booking.service';
 
@@ -12,7 +12,8 @@ export class BookBusComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private bookingSvc: BookingService
+    private bookingSvc: BookingService,
+    private router: Router
     ) { }
 
   public busDetails;
@@ -43,8 +44,10 @@ export class BookBusComponent implements OnInit {
       transactionMode: "Credit Card"
     }).subscribe(
       result => {
-
         alert(result)
+        if(result == "Booking Successful!") {
+          this.router.navigateByUrl("/user-bookings")
+        }
       }
     )
   }

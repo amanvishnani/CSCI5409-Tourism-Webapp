@@ -33,11 +33,13 @@ export class BookingService {
   }
 
   getAvailiableSeats(journeyId:any) {
-    return this.http.get<number>(`${this.BASE_URL}/booking/getBookingConfirmation`, {
+    const httpOptions: Object = {
+      responseType: 'text',
       params: {
         'journeyId': journeyId, 
         'totalSeats': '1'
       }
-    })
+    };
+    return this.http.get(`${this.BASE_URL}/booking/getBookingConfirmation`, httpOptions)
   }
 }

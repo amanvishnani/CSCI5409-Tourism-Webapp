@@ -32,6 +32,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './app-http-interceptor';
+import { UserBookingsComponent } from './user-bookings/user-bookings.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AppHttpInterceptor } from './app-http-interceptor';
     CityDetailComponent,
     HomeComponent,
     AttractionDetailsComponent,
-    LogoutComponent
+    LogoutComponent,
+    UserBookingsComponent
   ],
   imports: [
     BrowserModule,

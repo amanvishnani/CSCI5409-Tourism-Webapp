@@ -3,12 +3,14 @@
         <form class="form-inline" autocomplete="off" >
             <div class="form-group">
                 <input id="source-city" type="text" placeholder="Source City" class="form-control col-md-3"
-                    [(ngModel)]="sourceCity" [ngbTypeahead]="search" name="sourceCit" />
+                    [(ngModel)]="sourceCity" [ngbTypeahead]="search" name="sourceCit"
+                    [editable]='false' (selectItem)="onSourceCityChange($event)" />
                 <input id="destination-city" type="text" placeholder="Destination City" class="form-control col-md-3"
-                    [(ngModel)]="destinationCity" [ngbTypeahead]="search" name="destinationCit" />
+                    [(ngModel)]="destinationCity" [ngbTypeahead]="search" name="destinationCit"
+                    [editable]='false' (selectItem)="onDestCityChange($event)"/>
                 <div class="input-group col-md-4">
                     <input class="form-control" placeholder="Journey Date" name="dp" [(ngModel)]="journeyDate"
-                        ngbDatepicker #d="ngbDatepicker">
+                        ngbDatepicker [markDisabled]="journeyUnavailable" #d="ngbDatepicker">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
                             <fa-icon [icon]="faCalendar"></fa-icon>
@@ -47,8 +49,10 @@
                     </span>
                     <a *ngIf="bus.seatsAvailable==undefined" (click)="checkAvailibility(bus)" mat-button mat-raised-button>Check Availibility</a>
                 </td>
-                <a *ngIf="isLoggedIn && bus.seatsAvailable" (click)="bookBus(bus)" mat-button mat-raised-button>Book</a>
-                <a *ngIf="!isLoggedIn" routerLink="/login"  [queryParams]="{ref: getRef()}" mat-button mat-raised-button>Login to Book</a>
+                <td>
+                    <a *ngIf="isLoggedIn && bus.seatsAvailable" (click)="bookBus(bus)" mat-button mat-raised-button>Book</a>
+                    <a *ngIf="!isLoggedIn" routerLink="/login"  [queryParams]="{ref: getRef()}" mat-button mat-raised-button>Login to Book</a>
+                </td>
             </tr>
         </tbody>
     </table>

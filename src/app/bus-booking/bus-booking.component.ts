@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InfoService } from '../info.service';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth-service.service';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 const city_labels = [];
 
@@ -25,6 +26,7 @@ export class BusBookingComponent implements OnInit {
   public cityMap: Record<string, string> = {};
   public busRoutes: any[] = []
   public isLoggedIn;
+  public allRoutes: any[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -38,13 +40,14 @@ export class BusBookingComponent implements OnInit {
     this.isLoggedIn = this.as.isLoggedIn
   }
   
-  search = (text$: Observable<string>) =>
-    text$.pipe(
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map(term => term.length < 2 ? this.top_cities_labels
         : city_labels.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
+  }
 
   async setupView() {
     this.infoSvc.getAllCities().subscribe(
@@ -61,11 +64,37 @@ export class BusBookingComponent implements OnInit {
     )
   }
 
+  onSourceCityChange(event) {
+    this.sourceCity = event.item
+    let ob = this.searchJourney()
+    if(ob) {
+      ob.subscribe(this.updateAllRoutes);
+    }
+  }
+
+  onDestCityChange(event) {
+    this.destinationCity = event.item
+    let ob = this.searchJourney()
+    if(ob) {
+      ob.subscribe(this.updateAllRoutes);
+    }
+  }
+
+  updateAllRoutes = arr => {
+    this.allRoutes = arr.map(rt => {
+      let [year, month, day] = rt[0].split("-")
+      return {
+        year,
+        month, 
+        day
+      }
+    });
+  }
+
   searchRoutes() {
-    let sourceCityId = this.cityMap[this.sourceCity];
-    let destinationCityId = this.cityMap[this.destinationCity];
-    this.bookingSvc.searchRoutes(sourceCityId, destinationCityId)
-    .pipe(map( arr => {
+    let ob = this.searchJourney()
+    if(ob)
+    ob.pipe(map( arr => {
       return arr.filter( arr1 => {
         return arr1[0] == formatDate(this.journeyDate)
       })
@@ -88,9 +117,17 @@ export class BusBookingComponent implements OnInit {
     )
   }
 
+  searchJourney() {
+    let sourceCityId = this.cityMap[this.sourceCity];
+    let destinationCityId = this.cityMap[this.destinationCity];
+    if(!sourceCityId || !destinationCityId) {
+      return null
+    }
+    return this.bookingSvc.searchRoutes(sourceCityId, destinationCityId)
+  }
+
   bookBus(bus: any) {
     this.bookingSvc.bookingState = {bus, sourceCity: this.sourceCity, destinationCity: this.destinationCity}
-    // debugger
     this.router.navigateByUrl('/book-bus')
   }
 
@@ -103,6 +140,17 @@ export class BusBookingComponent implements OnInit {
     this.bookingSvc.getAvailiableSeats(journeyId).subscribe(
       totalAvail => bus.seatsAvailable = totalAvail
     );
+  }
+
+  journeyUnavailable = (date: NgbDate, current?: {year: number, month: number}) => {
+    for (const rt of this.allRoutes) {
+      if(rt.day != date.day ||
+        rt.month != date.month ||
+        rt.year != date.year) {
+          return true
+        }
+    }
+    return false;
   }
   
 

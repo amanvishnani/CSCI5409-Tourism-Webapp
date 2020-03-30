@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AttractionDetailsComponent } from './attraction-details/attraction-details.component';
 import { AuthGuard } from './auth.guard';
 import { LogoutComponent } from './logout/logout.component';
+import { UserBookingsComponent } from './user-bookings/user-bookings.component';
 
 
 const routes: Routes = [{
@@ -34,6 +35,11 @@ const routes: Routes = [{
 }, {
   path: 'bus-bookings',
   component: BusBookingComponent
+}, {
+  path: 'user-bookings',
+  component: UserBookingsComponent,
+  canActivate:[AuthGuard],
+  canLoad: [AuthGuard]
 }, {
   path: 'book-bus',
   component: BookBusComponent,
