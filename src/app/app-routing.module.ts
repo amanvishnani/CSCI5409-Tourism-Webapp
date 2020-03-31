@@ -12,6 +12,7 @@ import { AttractionDetailsComponent } from './attraction-details/attraction-deta
 import { AuthGuard } from './auth.guard';
 import { LogoutComponent } from './logout/logout.component';
 import { UserBookingsComponent } from './user-bookings/user-bookings.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 
 const routes: Routes = [{
@@ -43,6 +44,11 @@ const routes: Routes = [{
 }, {
   path: 'book-bus',
   component: BookBusComponent,
+  canActivate: [AuthGuard],
+  canLoad: [AuthGuard]
+}, {
+  path: 'analytics',
+  component: AnalyticsComponent,
   canActivate: [AuthGuard],
   canLoad: [AuthGuard]
 }, {

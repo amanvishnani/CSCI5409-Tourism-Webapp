@@ -144,13 +144,13 @@ export class BusBookingComponent implements OnInit {
 
   journeyUnavailable = (date: NgbDate, current?: {year: number, month: number}) => {
     for (const rt of this.allRoutes) {
-      if(rt.day != date.day ||
-        rt.month != date.month ||
-        rt.year != date.year) {
-          return true
+      if(rt.day == date.day &&
+        rt.month == date.month &&
+        rt.year == date.year) {
+          return false
         }
     }
-    return false;
+    return true;
   }
   
 

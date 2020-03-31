@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from '../booking.service';
+import { Booking } from '../booking';
 
 @Component({
   selector: 'app-user-bookings',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserBookingsComponent implements OnInit {
 
-  constructor() { }
+  public userBookings: Booking[] = []
+
+  constructor(private bookingSvc: BookingService) { }
 
   ngOnInit(): void {
+    this.getAllUserBookings()
+  }
+
+  getAllUserBookings() {
+    this.bookingSvc.getUserBooking().subscribe(
+      bookings => this.userBookings = bookings
+    )
   }
 
 }

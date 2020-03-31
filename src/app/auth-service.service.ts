@@ -11,6 +11,7 @@ export class AuthService {
   public isLoggedIn: boolean
   public loginState: Observable<boolean>
   public token: string
+  public userEmail: string
 
   constructor(private ampSvc: AmplifyService) { 
     this.loginState = this.ampSvc.authStateChange$.pipe(map(as => as.state == 'signedIn'))
@@ -21,6 +22,7 @@ export class AuthService {
   async setupState() {
     try {
       let user = await this.ampSvc.auth().currentAuthenticatedUser()
+      this.userEmail = user?.attributes?.email  
       this.token = user?.signInUserSession?.accessToken?.jwtToken || ""
       this.ampSvc.setAuthState({
         user: user,

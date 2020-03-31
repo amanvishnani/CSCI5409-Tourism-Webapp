@@ -33,6 +33,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './app-http-interceptor';
 import { UserBookingsComponent } from './user-bookings/user-bookings.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { UserBookingsComponent } from './user-bookings/user-bookings.component';
     HomeComponent,
     AttractionDetailsComponent,
     LogoutComponent,
-    UserBookingsComponent
+    UserBookingsComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { UserBookingsComponent } from './user-bookings/user-bookings.component';
     NgbModule,
     FontAwesomeModule,
     MatStepperModule,
-    HttpClientModule
+    HttpClientModule,
+    HighchartsChartModule
   ],
   providers: [AmplifyService,{
     provide: HTTP_INTERCEPTORS,

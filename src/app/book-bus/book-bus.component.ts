@@ -44,8 +44,8 @@ export class BookBusComponent implements OnInit {
       transactionMode: "Credit Card"
     }).subscribe(
       result => {
-        alert(result)
-        if(result == "Booking Successful!") {
+        alert(result.message)
+        if(result.message == "Booking Successful!") {
           this.router.navigateByUrl("/user-bookings")
         }
       }

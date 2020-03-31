@@ -1,1 +1,30 @@
-<p>user-bookings works!</p>
+<div class="container">
+    <table style="margin-top: 50px;" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Booking ID</th>
+                <th scope="col">From</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Operator</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Journey Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of userBookings; index as i">
+                <th scope="row">{{booking.bookingId}}</th>
+                <td>
+                    {{booking.sourceId}}
+                </td>
+                <td>
+                    {{booking.destinationId}}
+                </td>
+                <td>{{booking.company}}</td>
+                <td>{{booking.amount | currency:'CAD'}}</td>
+                <td>
+                    {{booking.journeyDate | date: 'dd-MMM-yyyy'}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
