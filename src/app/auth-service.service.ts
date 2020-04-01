@@ -14,7 +14,9 @@ export class AuthService {
   public userEmail: string
 
   constructor(private ampSvc: AmplifyService) { 
-    this.loginState = this.ampSvc.authStateChange$.pipe(map(as => as.state == 'signedIn'))
+    this.loginState = this.ampSvc.authStateChange$.pipe(map(as => { 
+      return as.state == 'signedIn'
+    } ))
     this.loginState.subscribe(state => this.isLoggedIn = state)
     this.setupState()
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   username = "aman"
-  password = "aman@1234"
+  password = "Aman@1234"
   code = ''
   mode = 'login'
   user = null
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private ampSvc: AmplifyService, 
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authSvc: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,10 @@ export class LoginComponent implements OnInit {
     let auth = this.ampSvc.auth()
     try {
       let r = await auth.confirmSignIn(this.user, this.code)
+      this.ampSvc.setAuthState({
+        state: 'signedIn',
+        user: r
+      })
       alert("SUCCESS")
       this.gotoNextPage()
     } catch (error) {

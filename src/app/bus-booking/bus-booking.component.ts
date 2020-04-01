@@ -8,8 +8,6 @@ import { BookingService } from '../booking.service';
 import { AuthService } from '../auth-service.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
-const city_labels = [];
-
 @Component({
   selector: 'app-bus-booking',
   templateUrl: './bus-booking.component.html',
@@ -18,6 +16,7 @@ const city_labels = [];
 export class BusBookingComponent implements OnInit {
 
   private top_cities_labels = []
+  city_labels = [];
 
   faCalendar = faCalendar
   public sourceCity: any;
@@ -45,18 +44,19 @@ export class BusBookingComponent implements OnInit {
       debounceTime(200),
       distinctUntilChanged(),
       map(term => term.length < 2 ? this.top_cities_labels
-        : city_labels.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        : this.city_labels.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
   }
 
   async setupView() {
     this.infoSvc.getAllCities().subscribe(
       cities => {
+        
         for (const city of cities) {
-          city_labels.push(city.name)
+          this.city_labels.push(city.name)
           this.cityMap[city.name] = city.id
         }
-        this.top_cities_labels = city_labels.filter((ele, idx) => idx<10)
+        this.top_cities_labels = this.city_labels.filter((ele, idx) => idx<10)
       }
     )
     this.route.queryParams.pipe(filter(obj => obj.destination)).subscribe(
