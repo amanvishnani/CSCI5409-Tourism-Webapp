@@ -4,21 +4,21 @@
     <div *ngIf="mode=='registration'">
         <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
-            <input matInput [(ngModel)]="username">
+            <input matInput [(ngModel)]="username" [required]="true">
         </mat-form-field>
         <br/>
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email">
+            <input matInput [(ngModel)]="email" [required]="true">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Phone</mat-label>
-            <input matInput [(ngModel)]="phone">
+            <input matInput [(ngModel)]="phone" [required]="true">
         </mat-form-field>
         <br/>
         <mat-form-field appearance="fill">
             <mat-label>Enter your password</mat-label>
-            <input matInput [(ngModel)]="password" [type]="'password'">
+            <input matInput [(ngModel)]="password" [type]="'password'" [required]="true">
         </mat-form-field>
         <br/>
         <button mat-raised-button (click)="register()">Register</button>
