@@ -51,7 +51,7 @@
                 </td>
                 <td>
                     <a *ngIf="isLoggedIn && bus.seatsAvailable" (click)="bookBus(bus)" mat-button mat-raised-button>Book</a>
-                    <a *ngIf="!isLoggedIn" routerLink="/login"  [queryParams]="{ref: getRef()}" mat-button mat-raised-button>Login to Book</a>
+                    <a *ngIf="!isLoggedIn && bus.seatsAvailable" routerLink="/login" (click)="saveSearchState()" [queryParams]="{ref: getRef()}" mat-button mat-raised-button>Login to Book</a>
                 </td>
             </tr>
         </tbody>

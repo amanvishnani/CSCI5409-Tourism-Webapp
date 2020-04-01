@@ -5,6 +5,7 @@ import { BookingInfo } from './booking-info';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Booking } from './booking';
+import { AuthService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,11 @@ import { Booking } from './booking';
 export class BookingService {
 
   public bookingState: any 
+  public searchState: any 
 
   private BASE_URL: string
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private authSvc: AuthService) { 
     this.BASE_URL = `${environment.baseUrl}/booking`
   }
 
@@ -30,7 +32,8 @@ export class BookingService {
   bookBus(info :BookingInfo) {
     return this.http.get<any>(`${this.BASE_URL}/booking/addBooking`, {
       params: {
-        ...info
+        ...info,
+        email: this.authSvc.userEmail || ""
       }
     })
   }

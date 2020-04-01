@@ -9,6 +9,7 @@
     <span class="spacer"></span>
     <mat-icon class="account-icon" aria-hidden="false" aria-label="Account" [matMenuTriggerFor]="menu">account_circle
     </mat-icon>
+    {{username}}
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngIf="authState" routerLink="/user-bookings">Previous Bookings</button>
       <button mat-menu-item *ngIf="!authState" routerLink="/login">Login</button>

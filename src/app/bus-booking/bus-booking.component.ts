@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { ActivatedRoute, Router } from '@angular/router';
 import { InfoService } from '../info.service';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth-service.service';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bus-booking',
@@ -37,6 +37,9 @@ export class BusBookingComponent implements OnInit {
   ngOnInit(): void {
     this.setupView()
     this.isLoggedIn = this.as.isLoggedIn
+    if(this.bookingSvc.searchState) {
+      this.restoreSearchState()
+    }
   }
   
   search = (text$: Observable<string>) => {
@@ -152,7 +155,21 @@ export class BusBookingComponent implements OnInit {
     }
     return true;
   }
-  
+  saveSearchState() {
+    this.bookingSvc.searchState = {
+      sourceCity: this.sourceCity,
+      destinationCity: this.destinationCity,
+      journeyDate: this.journeyDate
+    }
+  }
+
+  restoreSearchState() {
+    this.sourceCity = this.bookingSvc.searchState.sourceCity
+    this.destinationCity = this.bookingSvc.searchState.destinationCity
+    this.journeyDate = this.bookingSvc.searchState.journeyDate
+    this.bookingSvc.searchState = null;
+    this.searchRoutes()
+  }
 
 }
 

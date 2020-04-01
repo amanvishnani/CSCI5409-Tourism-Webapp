@@ -25,4 +25,14 @@ export class AnalyticsService {
     return this.http
     .get<DailyStats[]>(`${this.BASE_URL}/journeyStats/crowdForAllJourneys`)
   }
+
+  getDestinationStats() {
+    interface DestinantionStats {
+      totalJourneys: string;
+      cityName: string;
+      provinceName: string;
+    }
+
+    return this.http.get<DestinantionStats[]>(`${this.BASE_URL}/destinationStats/journeysForAllDestinations`)
+  }
 }

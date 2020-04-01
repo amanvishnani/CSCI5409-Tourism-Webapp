@@ -11,13 +11,21 @@ import { AuthService } from '../auth-service.service';
 export class NavBarComponent implements OnInit {
 
   authState: boolean = false
+  username: string = ""
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authState = this.authService.isLoggedIn
     this.authService.loginState
-    .subscribe(state => this.authState = state)
+    .subscribe(state => {
+      if(state) {
+        this.username = this.authService.userName
+      } else {
+        this.username = ""
+      }
+      this.authState = state
+    })
   }
 
 }

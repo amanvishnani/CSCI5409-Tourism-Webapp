@@ -20,7 +20,8 @@
                         <tr>
                             <th>Number of Tickets</th>
                             <td>
-                                <input [(ngModel)]="numTickets" type="number" [max]="busDetails.bus.seatsAvailable" />
+                                <input [(ngModel)]="numTickets" type="number" [max]="busDetails.bus.seatsAvailable"
+                                    min="1" />
                             </td>
                         </tr>
                         <tr>
@@ -37,17 +38,27 @@
         <div class="row">
             <div class="col-md-6">
                 <ng-template matStepLabel>Credit Card Details</ng-template>
-                <label style="margin-top: 50px;" for="cardNumber">16 Digit Number: <input name="cardNumber"
-                        [(ngModel)]="cardNumber"
-                        placeholder="5555 5555 5555 5555" type="text" /></label>
-                <br />
-                <label for="CVV">CVV: <input name="CVV" type="password" maxlength="4"
-                    [(ngModel)]="cvv" /></label>
-                <br />
-                <label for="expiry">Expiry Date (MMYY): <input name="expiry" type="text" placeholder="MMYY"
-                        maxlength="4" [(ngModel)]="cardExp" /></label>
-                <br />
-                <button mat-raised-button (click)="payAndcompleteBooking()">Pay</button>
+                <form>
+                    <mat-form-field  style="margin-top: 50px; width: 400px;">
+                        <mat-label style="margin-top: 50px;" for="cardNumber">16 Digit Number: </mat-label>
+                        <input matInput name="cardNumber" [(ngModel)]="cardNumber" placeholder="5555-5555-5555-5555"
+                            type="text" pattern="^[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}" />
+                            <mat-hint>16 digits number with hypen separator</mat-hint>
+                    </mat-form-field>
+                    <br />
+                    <mat-form-field>
+                        <mat-label style="margin-top: 50px;" for="CVV">CVV: </mat-label>
+                        <input matInput name="CVV" type="password" maxlength="4" [(ngModel)]="cvv" />
+                    </mat-form-field>
+                    <br />
+                    <mat-form-field>
+                        <mat-label style="margin-top: 50px;" for="expiry">Expiry Date (MMYY):</mat-label>
+                        <input name="expiry" type="text" placeholder="MMYY" matInput maxlength="4"
+                            [(ngModel)]="cardExp" />
+                    </mat-form-field>
+                    <br />
+                    <button mat-raised-button (click)="payAndcompleteBooking()">Pay</button>
+                </form>
             </div>
         </div>
     </mat-step>

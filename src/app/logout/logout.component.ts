@@ -17,6 +17,10 @@ export class LogoutComponent implements OnInit {
   logout() {
     let authObj = this.ampSvc.auth();
     authObj.signOut()
+    this.ampSvc.setAuthState({
+      state: 'signedOut',
+      user: null
+    })
   }
 
 }
